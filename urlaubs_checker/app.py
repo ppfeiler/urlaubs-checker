@@ -42,6 +42,8 @@ def run() -> None:
         print("No valid times found")
         return
 
+    send_notification(valid_times)
+
 
 def call_union_lido(arrival: str, departure: str):
     request_body = {
