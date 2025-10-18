@@ -8,7 +8,7 @@
 
 The recommended way to install this tool is via [uv](https://github.com/astral-sh/uv):
 ```bash
-uv tool install git+ssh://github.com:ppfeiler/urlaubs-checker.git
+uv tool install https://github.com:ppfeiler/urlaubs-checker.git
 ```
 
 ## Upgrading
