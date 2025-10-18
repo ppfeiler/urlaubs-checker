@@ -19,14 +19,8 @@ POSSIBLE_TIMES: list[tuple[str, str]] = [
     ("2026-07-26", "2026-08-09"),
 ]
 
-NOTIFY_EVENT_SOURCE_TOKEN: str = os.environ.setdefault("NOTIFY_EVENT_SOURCE_TOKEN", "")
-
 
 def run() -> None:
-    if not NOTIFY_EVENT_SOURCE_TOKEN:
-        print("Please set the environment variable 'NOTIFY_EVENT_SOURCE_TOKEN'")
-        sys.exit(1)
-
     valid_times: list[tuple[str, str]] = []
 
     for possible_time in POSSIBLE_TIMES:
@@ -84,6 +78,16 @@ def call_union_lido(arrival: str, departure: str):
 
 
 def send_notification(valid_times: list[tuple[str, str]]) -> None:
+    notify_event_source_token: str = os.environ.setdefault(
+        "NOTIFY_EVENT_SOURCE_TOKEN",
+        "",
+    )
+    if not notify_event_source_token:
+        print(
+            "[WARN] Skip notification. Environment variable NOTIFY_EVENT_SOURCE_TOKEN is not set.",
+        )
+        return
+
     msg = f"<b>{ACCOMMODATION_NAME}</b> ist an folgenden Terminen verfügbar:<br>"
     for time in valid_times:
         arrival_time = datetime.strptime(time[0], "%Y-%m-%d")
@@ -96,4 +100,5 @@ def send_notification(valid_times: list[tuple[str, str]]) -> None:
         Message.PRIORITY_HIGHEST,
         Message.LEVEL_WARNING,
     )
-    message.send(NOTIFY_EVENT_SOURCE_TOKEN)
+    message.send(notify_event_source_token)
+    print("[INFO] Notification sent.")
