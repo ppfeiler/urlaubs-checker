@@ -1,5 +1,6 @@
 import os
 import sys
+from datetime import datetime
 
 import httpx
 from notify_events import Message
@@ -93,7 +94,9 @@ def call_union_lido(arrival: str, departure: str):
 def send_notification(valid_times: list[tuple[str, str]]) -> None:
     msg = f"<b>{ACCOMMODATION_NAME}</b> ist an folgenden Terminen verfügbar:<br>"
     for time in valid_times:
-        msg += f"- {time[0]} - {time[1]}<br>"
+        arrival_time = datetime.strptime(time[0], "%Y-%m-%d")
+        departure_time = datetime.strptime(time[1], "%Y-%m-%d")
+        msg += f"- {arrival_time.strftime('%d.%m.%Y')} - {departure_time.strftime('%d.%m.%Y')} ({(departure_time - arrival_time).days} Tage)<br>"
 
     message = Message(
         msg,
