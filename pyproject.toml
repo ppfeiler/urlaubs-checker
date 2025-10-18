@@ -1,0 +1,38 @@
+[project]
+name = "urlaubs-checker"
+version = "0.1"
+description = ""
+readme = "README.md"
+authors = [{name = "Patrick Pfeiler"}]
+license = "GPL-3.0-only"
+requires-python = ">=3.10"
+classifiers = []
+dependencies = [
+    "python-dotenv>=1.1.1",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/ppfeiler/urlaubs-checker"
+Changelog = "https://github.com/ppfeiler/urlaubs-checker/releases"
+Issues = "https://github.com/ppfeiler/urlaubs-checker/issues"
+CI = "https://github.com/ppfeiler/urlaubs-checker/actions"
+
+[project.scripts]
+urlaubs-checker = "urlaubs_checker.app:run"
+
+[tool.uv]
+dev-dependencies = [
+    "pre-commit",
+    "pytest",
+]
+
+[tool.ty.rules]
+unresolved-import = "ignore"
+# TODO: Unable to resolve submodules: https://github.com/astral-sh/ty/issues/445
+unresolved-attribute = "ignore"
+# TODO: Unable to work with **kwargs: https://github.com/astral-sh/ty/issues/247
+missing-argument = "ignore"
