@@ -17,8 +17,6 @@ POSSIBLE_TIMES: list[tuple[str, str]] = [
     ("2026-07-12", "2026-07-26"),
     ("2026-07-19", "2026-08-02"),
     ("2026-07-26", "2026-08-09"),
-    # test
-    ("2026-05-05", "2026-05-09"),
 ]
 
 NOTIFY_EVENT_SOURCE_TOKEN: str = os.environ.setdefault("NOTIFY_EVENT_SOURCE_TOKEN", "")
