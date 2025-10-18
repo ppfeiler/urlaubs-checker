@@ -35,7 +35,7 @@ def run() -> None:
         (arrival, departure) = possible_time
         response = call_union_lido(arrival, departure)
 
-        for free in response["free"]:
+        for free in response:
             if str(free["name"]).lower() == ACCOMMODATION_NAME.lower():
                 valid_times.append(possible_time)
 
@@ -74,19 +74,13 @@ def call_union_lido(arrival: str, departure: str):
         print(response.text)
         sys.exit(1)
 
-    search_results = {"free": [], "partial": [], "reserved": [], "unknown": []}
+    search_results = []
 
     response_body = response.json()
     for accommodation in response_body:
         match accommodation["status"]:
             case "free":
-                search_results["free"].append(accommodation)
-            case "partial":
-                search_results["partial"].append(accommodation)
-            case "reserved":
-                search_results["reserved"].append(accommodation)
-            case _:
-                search_results["unknown"].append(accommodation)
+                search_results.append(accommodation)
 
     return search_results
 
