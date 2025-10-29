@@ -1,6 +1,7 @@
 import os
 import sys
 from datetime import datetime
+from typing import Any
 
 import httpx
 from notify_events import Message
@@ -38,7 +39,7 @@ def run() -> None:
     send_notification(valid_times)
 
 
-def call_union_lido(arrival: str, departure: str):
+def call_union_lido(arrival: str, departure: str) -> list[Any]:
     request_body = {
         "arrival": arrival,
         "departure": departure,
