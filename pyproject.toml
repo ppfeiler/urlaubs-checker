@@ -5,12 +5,18 @@ description = ""
 readme = "README.md"
 authors = [{name = "Patrick Pfeiler"}]
 license = "GPL-3.0-only"
-requires-python = ">=3.10"
+requires-python = ">=3.14"
 classifiers = []
 dependencies = [
     "httpx>=0.28.1",
     "notify-events>=1.1.3",
     "python-dotenv>=1.1.1",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit",
+    "pytest",
 ]
 
 [build-system]
@@ -26,11 +32,6 @@ CI = "https://github.com/ppfeiler/urlaubs-checker/actions"
 [project.scripts]
 urlaubs-checker = "urlaubs_checker.app:run"
 
-[tool.uv]
-dev-dependencies = [
-    "pre-commit",
-    "pytest",
-]
 
 [tool.ty.rules]
 unresolved-import = "ignore"
